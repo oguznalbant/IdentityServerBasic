@@ -34,6 +34,8 @@ namespace AuthServer
             //gerekecektir. Bunun için public key’e ihtiyacý vardýr. Dolayýsýyla API’da ‘AuthServer’dan public key’i 
             //alýr. Velhasýl, gelen istekteki private key ile API’da ki public key uyumu kontrol edilir ve doðrulama 
             // neticesinde istek baþarýyla sonuçlanýr.
+
+            services.AddControllersWithViews(); //MVC için
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,12 +48,15 @@ namespace AuthServer
 
             app.UseRouting();
 
+            app.UseStaticFiles(); //wwwroot'a eriþim için
+            app.UseAuthentication(); //kimlik doðrulama için
+            app.UseAuthorization(); //yetkilendirme için
+
             app.UseIdentityServer();
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapDefaultControllerRoute(); //url rotasý için
             });
         }
     }

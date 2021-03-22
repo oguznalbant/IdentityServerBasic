@@ -26,8 +26,18 @@ namespace AuthServer
         {
             return new List<ApiResource>
         {
-            new ApiResource("Garanti"){ Scopes = { "Garanti.Write", "Garanti.Read" } },
-            new ApiResource("HalkBank"){ Scopes = { "HalkBank.Write", "HalkBank.Read" } }
+            new ApiResource("Garanti"){ // api username
+                ApiSecrets = {  //api password
+                    new Secret("garanti".Sha256())
+                },
+                Scopes = { "Garanti.Write", "Garanti.Read" }
+            },
+            new ApiResource("HalkBank"){
+                ApiSecrets = {
+                    new Secret("halkbank".Sha256())
+                },
+                Scopes = { "HalkBank.Write", "HalkBank.Read" }
+            }
         };
         }
         #endregion

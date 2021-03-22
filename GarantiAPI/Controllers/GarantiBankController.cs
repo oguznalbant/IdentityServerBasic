@@ -16,6 +16,7 @@ namespace GarantiAPI.Controllers
             return 1000;
         }
         [HttpGet("{musteriId}")]
+        [Authorize(Policy = "ReadGaranti")]
         public List<string> TumHesaplar(int musteriId)
         {
             //....
